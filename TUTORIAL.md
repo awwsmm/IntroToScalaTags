@@ -53,11 +53,11 @@ You should now have some code completion in IntelliJ for Scala code. Let's add t
 import scalatags.JsDom.all._
 ```
 
-It will be greyed-out because we're not using it yet, but don't worry about that for now. Just run `fastOptJS` in th `sbt` shell...
+It will be greyed-out because we're not using it yet, but don't worry about that for now. Just run `fastOptJS` in the `sbt` shell...
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial02.png)
 
-...it looks like it's working! Great, let's try to add a **paragraph** tag. In HTML markup, this looks like `<p>...</p>`. Using ScalaTags, this is created with the `p()` method from package `scalatags.JsDom.all`. Adding this paragraph and running `fastOptJS` again works:
+...it looks like it's working! Great, let's try to add a **paragraph** tag. In HTML markup, this looks like `<p>...</p>`. Using ScalaTags, this is created with the `p()` method from `scalatags.JsDom.all`. Adding this paragraph and running `fastOptJS` again works:
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial03.png)
 
@@ -67,17 +67,19 @@ So let's try to view this in the browser: open `index.html` and click the icon f
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial13.png)
 
-There's still nothing in the browser, and the console is throwing a `404 NOT FOUND` error. What happened?
+There's still nothing in the browser, and the console is throwing a `404 (Not Found)` error. What happened?
 
 Well, we ran `fastOptJS` to generate the `-fastopt.js` file, but our `index.html` is looking for the `-opt.js` (`fullOptJS`) file. Make sure the version you're generating matches the version that appears in your HTML file. During development, we'll stick to `fastOptJS`, so let's change `index.html` and try again. (There's no need to re-run `fastOptJS` now, because we've already run it with the most recent version of our Scala code.)
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial05.png)
 
+Refreshing (or reopening) `index.html` in the browser now gives
+
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial14.png)
 
-We've cleared the `404` error and we again have our text in the console, but the element inspector shows nothing in the `<body>` (no `<p>` tags)! The reason for this is that `scalatags.JsDom.all.p()` just returns a paragraph object -- writing it to the body of the webpage is a side-effect, which must be done separately.
+We've cleared the `404` error and we again have our text in the console, but the element inspector shows nothing in the `<body>` (no `<p>` tag)! The reason for this is that `scalatags.JsDom.all.p()` just returns a paragraph _object_ -- writing it to the body of the web page is a side-effect, which must be done separately. To understand how to do that, let's talk about HTML document structure for a second.
 
-An HTML document is a tree of tags (or "elements") which typically have an opening tag (like `<p>`) and a closing tag (like `</p>`). The root element of the visible area of an HTML document is the `<body></body>` tag. In Scala.js, `body` is a field of the `abstract class HTMLDocument`, which we can access via `scala.scalajs.js.dom.document`.
+An HTML document is a tree of tags (or "elements") which typically have an opening tag (like `<p>`) and a closing tag (like `</p>`). The root element of the visible area of an HTML document is the `<body></body>` tag. In Scala.js, the `<body>` element can be accessed via `scala.scalajs.js.dom.document.body` (`document` extends the `abstract class HTMLDocument`).
 
 > [The DOM, or _Document Object Model_](https://en.wikipedia.org/wiki/Document_Object_Model), is the tree-based model of an HTML document. Every branch of the DOM tree ends in an Element (a "Node").
 
@@ -115,11 +117,11 @@ _This time_, even though we waited for the `DOMContentLoaded` event, we still tr
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial11.png)
 
-...and we finally have our paragraph!
+...we finally have our paragraph!
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial12.png)
 
-Great, now we can finally start making our webpage!
+Now that we understand how to get HTML content to render in the web browser using Scala.js and ScalaTags, we can finally start making our webpage!
 
 ## Section 2: Building a Web Page with ScalaTags
 

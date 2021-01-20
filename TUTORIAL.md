@@ -1,5 +1,7 @@
 # IntroToScalaTags
 
+## Section 1: Our First ScalaTag
+
 We start this tutorial with a project structure similar to the one with which we ended in the previous tutorial. Something like:
 
 ```
@@ -63,11 +65,15 @@ So let's try to view this in the browser: open `index.html` and click the icon f
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial04.png)
 
+![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial13.png)
+
 There's still nothing in the browser, and the console is throwing a `404 NOT FOUND` error. What happened?
 
 Well, we ran `fastOptJS` to generate the `-fastopt.js` file, but our `index.html` is looking for the `-opt.js` (`fullOptJS`) file. Make sure the version you're generating matches the version that appears in your HTML file. During development, we'll stick to `fastOptJS`, so let's change `index.html` and try again. (There's no need to re-run `fastOptJS` now, because we've already run it with the most recent version of our Scala code.)
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial05.png)
+
+![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial14.png)
 
 We've cleared the `404` error and we again have our text in the console, but the element inspector shows nothing in the `<body>` (no `<p>` tags)! The reason for this is that `scalatags.JsDom.all.p()` just returns a paragraph object -- writing it to the body of the webpage is a side-effect, which must be done separately.
 
@@ -112,3 +118,9 @@ _This time_, even though we waited for the `DOMContentLoaded` event, we still tr
 ...and we finally have our paragraph!
 
 ![](https://github.com/awwsmm/IntroToScalaTags/blob/master/resources/tutorial12.png)
+
+Great, now we can finally start making our webpage!
+
+## Section 2: Building a Web Page with ScalaTags
+
+WIP

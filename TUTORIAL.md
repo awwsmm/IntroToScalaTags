@@ -50,7 +50,7 @@ Then, click on the "Load sbt changes" button in the tiny modal that pops up (the
 You should now have some code completion in IntelliJ for Scala code. Let's add the following import to the top of `Index.scala`
 
 ```scala
-import scalatags.JsDom.all._
+
 ```
 
 It will be greyed-out because we're not using it yet, but don't worry about that for now. Just run `fastOptJS` in the `sbt` shell...
@@ -125,4 +125,33 @@ Now that we understand how to get HTML content to render in the web browser usin
 
 ## Section 2: Building a Web Page with ScalaTags
 
-WIP
+In this next section, I'd like to show what's possible with ScalaTags.
+
+Li Haoyi is the primary developer and maintainer of ScalaTags, and [the repo is still active](https://github.com/lihaoyi/scalatags) as of this writing (presently, the latest release is `0.9.2`). Haoyi has a very detailed, very useful [guide to ScalaTags on his website](https://www.lihaoyi.com/scalatags/), so my treatment below won't be encyclopedic -- rather, I'd just like to get you up and running with the library.
+
+ScalaTags makes it easy to develop large, type-safe Scala applications with graphical interfaces, via the web browser.
+
+For this project, I'm going to use two free, open APIs to get some random data: [random.dog](https://random.dog), which returns random dog photos, and [lukePeavey](https://github.com/lukePeavey) 's [quotable](https://github.com/lukePeavey/quotable), which returns random inspirational quotes.
+
+> The [`public-apis` GitHub repo](https://github.com/public-apis/public-apis) contains a list of these and many other free (and often authentication-free) APIs, which provide easy example data for projects like this.
+
+Scala.js allows us to use all the programming paradigms with which we're familiar, with no compromises. So if I want to pull an image from `random.dog`, I'll do it just as I would in Scala. I'll create a new file, `Random.scala`, with a single object, `Random`, and a method to request a random dog from the public API.
+
+You can use any HTTP library you like for this task. One of the more popular ones is [Software Mill's `sttp`](https://github.com/softwaremill/sttp), so I add that to my `build.sbt` and load the SBT changes by clicking on the pop-up:
+
+```scala
+// sttp
+libraryDependencies += "com.softwaremill.sttp.client3" %% "core" % "3.0.0"
+```
+
+I will also use [`circe`](https://github.com/circe/circe) to quickly and easily parse the returned JSON into case classes:
+
+
+
+// TODO: IMAGE HERE
+
+Then, I create a new file, `Random.scala`, which I'll use to generate random data via HTTP requests:
+
+```scala
+
+```

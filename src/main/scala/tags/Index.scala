@@ -1,6 +1,6 @@
 //   https://github.com/awwsmm/IntroToScalaTags
 
-package scalatags
+package tags
 
 import org.scalajs.dom
 import org.scalajs.dom.document
